@@ -16,7 +16,9 @@ artist_title = songs[["artist","song"]] #can use to sort by artist and song, no 
 artist_title_lyrics = songs[["artist","song","text"]] #can use to sort by all filterable columns
 title_lyrics = songs[["song","text"]] #can use to sort by song name and lyrics
 
-class song_features:
+class song_features: 
+    """Connect to Spotify Web API to find details about matched song.
+    """
     client_id = "04fe36c0ba5846f4856fc7796ff4eab8"
     client_secret = "9c45909506b247088e7d296bfae4ae54"
     redirect_uri = "http://localhost:9000"

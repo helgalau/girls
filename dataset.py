@@ -32,3 +32,19 @@ class song_features:
     # Find song features
     # Print out song info and details
     # Maybe recommend other songs with similar BPM?
+def search_song_lyrics():
+    # Get input from user for song lyrics
+    search = input("What lyrics do you want to search for?: ")
+    
+    with open('spotify_millsongdata.csv', 'r') as file:
+        lines = file.readlines()
+
+        # Use a list comprehension to pull the lines that have the search the user wants
+        match = [line for line in lines if search in line]
+        
+        if matching_lines:
+            print("Matching songs:")
+            for line in matching_lines:
+                print(line)
+                
+search_song_lyrics()

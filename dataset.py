@@ -1,12 +1,4 @@
-"hi"
-
-"this is michelle"
-
-"this is helga"
-
-"this is emily"
-
-"this is roshini"
+## link to csv -> https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 
 import pandas as pd # Michelle, if any of you guys need help installing module lmk
 

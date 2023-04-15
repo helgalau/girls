@@ -1,6 +1,6 @@
 ## link to csv -> https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 
-import pandas as pd # Michelle, if any of you guys need help installing module lmk
+import pandas as pd # Michelle
 
 songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
 ## print(songs["artist"])
@@ -14,3 +14,5 @@ artist_title = songs[["artist","song"]] #can use to sort by artist and song, no 
 artist_title_lyrics = songs[["artist","song","text"]] #can use to sort by all filterable columns
 title_lyrics = songs[["song","text"]] #can use to sort by song name and lyrics
 
+def listcomp_match():
+    

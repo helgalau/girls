@@ -10,3 +10,4 @@
 
 import pandas as pd # Michelle, if any of you guys need help installing module lmk
 
+songname = pd.read_csv("spotify_millsongdata.csv", sep = ",")

@@ -26,5 +26,7 @@ class song_features:
                                               client_secret=client_secret,
                                               redirect_uri=redirect_uri))
     
-    
-    
+    # Connect matched song to spotify API
+    # Find song features
+    # Print out song info and details
+    # Maybe recommend other songs with similar BPM?

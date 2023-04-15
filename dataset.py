@@ -36,15 +36,15 @@ def search_song_lyrics():
     # Get input from user for song lyrics
     search = input("What lyrics do you want to search for?: ")
     
-    with open('spotify_millsongdata.csv', 'r') as file:
-        lines = file.readlines()
+    with open('spotify_millsongdata.csv', 'r', encoding = "utf-8") as f:
+        lines = f.readlines()
 
         # Use a list comprehension to pull the lines that have the search the user wants
         match = [line for line in lines if search in line]
         
-        if matching_lines:
+        if match:
             print("Matching songs:")
-            for line in matching_lines:
+            for line in match:
                 print(line)
                 
 search_song_lyrics()

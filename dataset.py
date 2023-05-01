@@ -2,11 +2,9 @@
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 
 import pandas as pd 
-#import spotipy
-#from spotipy.oauth2 import SpotifyOAuth
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+
 
 song_info = pd.read_csv("Spotify_Youtube.csv")
 songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
@@ -39,8 +37,6 @@ def search_song_lyrics():
                 
 search_song_lyrics()
 
-#load the csv file into pandas df
-df = pd.read_csv('spotify_millsongdata.csv')
 
 #clean function using regular expression
 def clean_lyrics(text):
@@ -62,13 +58,3 @@ users_cleaned_input = clean_lyrics(user_input)
 #take user's cleaned lyrical input and convert to a matrix to compare and find the closest related song
 user_matrix = vectorizer.transform(df['cleaned_lyrics'])
 
-#use cosine similarily in NPL to assess whether the user's lyrics and the song's lyrics are the same
-#lyrical_similarities = cosine_similarity(lyric_matrix, user_matrix)
-
-#create a sorted list of ranked songs based on their cosine similarites 
-#ranked_songs = pd.DataFrame({'song': df['song'], 'artist': df['artist'], 'similarity': lyrical_similarities.flatten()})
-#ranked_songs_sorted = ranked_songs.sort_values('similarity', ascending=False)
-
-#print the top 5 song matches with their similarity scores in comparison's to the user's lyrical input 
-#top_5_songs = ranked_songs_sorted[['song', 'artist', 'similarity']].head(5) #use the .head() function to get the top 5 song matches
-#print(top_5_songs)

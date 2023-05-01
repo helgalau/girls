@@ -27,8 +27,10 @@ song_info.drop("official_video", axis = 1)
 df = songs.merge(song_info, left_on = ["artist","song"], right_on= ["Artist","Track"])
 df.drop("Artist", axis = 1)
 df.drop("Track", axis = 1)
-df
-#pandas stuff
+
+#print(df['artist'].tolist())
+#print(df[df["artist"] == "ABBA"].tolist())
+
 #merge + drop columns turn each column into a list
 
 class Song:

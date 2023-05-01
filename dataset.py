@@ -78,12 +78,12 @@ users_cleaned_input = clean_lyrics(user_input)
 user_matrix = vectorizer.transform(df['cleaned_lyrics'])
 
 #use cosine similarily in NPL to assess whether the user's lyrics and the song's lyrics are the same
-lyrical_similarities = cosine_similarity(lyric_matrix, user_matrix)
+#lyrical_similarities = cosine_similarity(lyric_matrix, user_matrix)
 
 #create a sorted list of ranked songs based on their cosine similarites 
-ranked_songs = pd.DataFrame({'song': df['song'], 'artist': df['artist'], 'similarity': lyrical_similarities.flatten()})
-ranked_songs_sorted = ranked_songs.sort_values('similarity', ascending=False)
+#ranked_songs = pd.DataFrame({'song': df['song'], 'artist': df['artist'], 'similarity': lyrical_similarities.flatten()})
+#ranked_songs_sorted = ranked_songs.sort_values('similarity', ascending=False)
 
 #print the top 5 song matches with their similarity scores in comparison's to the user's lyrical input 
-top_5_songs = ranked_songs_sorted[['song', 'artist', 'similarity']].head(5) #use the .head() function to get the top 5 song matches
-print(top_5_songs)
+#top_5_songs = ranked_songs_sorted[['song', 'artist', 'similarity']].head(5) #use the .head() function to get the top 5 song matches
+#print(top_5_songs)

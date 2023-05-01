@@ -51,7 +51,8 @@ class Song:
                 for line in match:
                     print(line)
 def main():
-    search_song_lyrics()            
+    x = Song()
+    x.search_song_lyrics()            
         
     if __name__ == "__main__":
         main()

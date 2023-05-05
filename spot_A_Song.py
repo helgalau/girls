@@ -48,7 +48,7 @@ def regexGroup():
         return match
         
 class Song:
-    def __init__(self, artists, lyrics, links, durations):
+    def __init__(self):
         """Initializes the artists, lyrics, links, and durations
            of the songs in an empty list.
         """
@@ -83,7 +83,16 @@ class Song:
             return artist_match 
             
     def __str__(self):
+<<<<<<< HEAD
+=======
+        """Give link and duration for the top 3 matches.
+        """
+        
+        
+>>>>>>> 0777b9faec51eaee79e80d6eb70cc000d2537a6b
         return ""
+        
+        
     
     
 def main():

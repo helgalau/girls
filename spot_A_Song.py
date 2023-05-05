@@ -48,29 +48,41 @@ def regexGroup():
         return match
         
 class Song:
-    def __init__(self):
-        self.arists = []
+    def __init__(self, artists, lyrics, links, durations):
+        """Initializes the artists, lyrics, links, and durations
+           of the songs in an empty list.
+        """
+        self.artists = []
         self.lyrics = []
         self.links = []
         self.duration = []
       
     def search_song_lyrics(self, lyrics_search, artist_search):
-        regex_call = regexGroup()
-        # Use a list comprehension to pull the lines that have the search the user wants
-        lyrics_match = [match for match in regex_call if artist_search in match]
+        """ Finds a match for the lyrics and the artist that
+            the user inputed.
+            
+        Args:
+            lyrics_search (list of strings): lyrics that the user inputed
+            artist_search (list of strings): artist that the user inputed
+            
+        Returns:
+            lyrics_match: the matching lyrics
+            artist_match: the matching artist
+        
+        """
+        regex_matches = regexGroup()
+        # Use list comprehension to pull matching lyrics
+        lyrics_match = [match for match in regex_matches if lyrics_search
+                        in match.group('lyrics')]
         if lyrics_match:
             return lyrics_match
-                    
-        artist_match = [match.group('artist') for match in regexGroup()]
+        #Use list comprehension to pull matching artists        
+        artist_match = [match.group('artist') for match in regex_matches 
+                        if artist_search in match.group('artist')]
         if artist_match:
             return artist_match 
             
     def __str__(self):
-        link = ""
-        duration = ""
-        for link, duration in self.lyrics, self.duration:
-            pass
-        
         return ""
     
     

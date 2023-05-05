@@ -27,12 +27,8 @@ def pandas():
     with open('filename2.txt', 'r') as g:
         for y in g:
             print(y)
-        
-class Song:
-    def __init__(self):
-        pass
-    
-    def regexGroup(self):
+            
+def regexGroup():
         with open('filename2.csv', 'r', encoding = "utf-8") as f:
             lines = f.readlines()
         regex = r""""(?x)
@@ -50,8 +46,12 @@ class Song:
                 """
         match = re.search(regex, lines)
         return match
+        
+class Song:
+    def __init__(self):
+        pass
       
-    def search_song_lyrics():
+    def search_song_lyrics(self):
     # Get input from user for song lyrics
         search = input("What lyrics do you want to search for?: ")
         artist_search = input("What is the name of the artist?: ")
@@ -64,9 +64,9 @@ class Song:
                 print("Matching songs:")
                 for line in match:
                     print(line)
-        
+                    
             artist_match = [match.group('artist') for match in regexGroup()]
-            print(f" The possible artist(s) are: {artist}") 
+            print(f" The possible artist(s) are: {artist_match}") 
             
 def main():
     x = Song()

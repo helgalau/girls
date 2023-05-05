@@ -56,19 +56,21 @@ class Song:
         # Use a list comprehension to pull the lines that have the search the user wants
         lyrics_match = [match for match in regex_call if search in match]
         if lyrics_match:
-            print("Matching songs:")
-            for line in match:
-                print(line)
+            return lyrics_match
                     
-            artist_match = [match.group('artist') for match in regexGroup()]
-            print(f" The possible artist(s) are: {artist_match}") 
+        artist_match = [match.group('artist') for match in regexGroup()]
+        if artist_match:
+            return artist_match 
             
 def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist?: ")
      x = Song()
-     x.search_song_lyrics()            
-        
+     x.search_song_lyrics()
+     # Displays the matching songs and artists
+     print(f"The possible matching song(s) are: {lyrics_match}")          
+     print(f" The possible artist(s) are: {artist_match}")   
+     
 if __name__ == "__main__":
      main()

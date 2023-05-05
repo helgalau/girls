@@ -29,7 +29,7 @@ def pandas():
             print(y)
             
 def regexGroup():
-        with open('filename2.csv', 'r', encoding = "utf-8") as f:
+        with open('filename2.txt', 'r', encoding = "utf-8") as f:
             lines = f.readlines()
         regex = r""""(?x)
                     ^\['(?P<artist>.+?)',

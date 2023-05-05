@@ -20,29 +20,28 @@ def pandas():
     #x= df[df["artist"] == "ABBA"].values.tolist()
     ## if they know the artist, we can search from here or use regex/list comp
 
-    with open('filename2.txt', 'w') as f:
+    with open('filename3.txt', '+w',encoding = "utf-8") as f:
         for items in x:
             f.write("%s\n" % items)
 
-    with open('filename2.txt', 'r') as g:
+    with open('filename3.txt', 'r', encoding = "utf-8") as g:
         for y in g:
             print(y)
             
 def regexGroup():
-        with open('filename2.txt', 'r', encoding = "utf-8") as f:
+        with open('filename3.txt', 'r', encoding = "utf-8") as f:
             lines = f.readlines()
-        regex = r""""(?x)
-                    ^\['(?P<artist>.+?)',
-                    \s'(?P<name> .+?)',
-                    \s\"(?P<lyrics> .+?)\",
-                    \s'(?P<spotifyLink> .+?)',
-                    \s'(?P<albumName> .+?)',
-                    \s'(?P<albumType> .+?)',
-                    \s'(?P<track> .+?)',
-                    \s(?P<duration> .+?),
+        regex = r"""(?xm)^\['(?P<artist>.+?)',
+                    \s'(?P<name>.+?)',
+                    \s\"(?P<lyrics>.+?)\",
+                    \s'(?P<spotifyLink>.+?)',
+                    \s'(?P<albumName>.+?)',
+                    \s'(?P<albumType>.+?)',
+                    \s'(?P<track>.+?)',
+                    \s(?P<duration>.+?),
                     \s(?P<youtube>.+?)',
                     \s(?P<views>.+?),
-                    \s(?P<streams>.+?)]
+                    \s(?P<streams>.+?)\]
                 """
         match = re.search(regex, lines)
         return match
@@ -83,6 +82,10 @@ class Song:
             return artist_match 
             
     def __str__(self):
+        """Give link and duration for the top 3 matches.
+        """
+        
+        
         return ""
         
         
@@ -93,6 +96,7 @@ def main():
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist?: ")
      x = Song()
+     pandas()
      x.search_song_lyrics(lyrics_search, artist_search)
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x.lyrics_match}")          

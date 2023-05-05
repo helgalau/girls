@@ -51,10 +51,10 @@ class Song:
     def __init__(self):
         pass
       
-    def search_song_lyrics(self):
+    def search_song_lyrics(self, lyrics_search, artist_search):
         regex_call = regexGroup()
         # Use a list comprehension to pull the lines that have the search the user wants
-        lyrics_match = [match for match in regex_call if search in match]
+        lyrics_match = [match for match in regex_call if artist_search in match]
         if lyrics_match:
             return lyrics_match
                     
@@ -69,8 +69,8 @@ def main():
      x = Song()
      x.search_song_lyrics()
      # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {lyrics_match}")          
-     print(f" The possible artist(s) are: {artist_match}")   
+     print(f"The possible matching song(s) are: {x.lyrics_match}")          
+     print(f" The possible artist(s) are: {x.artist_match}")   
      
 if __name__ == "__main__":
      main()

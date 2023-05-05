@@ -66,6 +66,11 @@ class Song:
             return artist_match 
             
     def __str__(self):
+        link = ""
+        duration = ""
+        for link, duration in self.lyrics, self.duration:
+            pass
+        
         return ""
     
     

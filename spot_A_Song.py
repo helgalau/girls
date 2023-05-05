@@ -2,7 +2,7 @@
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 import pandas as pd 
 import re
-from sklearn.feature_extraction.text import TfidfVectorizer 
+#from sklearn.feature_extraction.text import TfidfVectorizer 
 
 def pandas():
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
@@ -29,7 +29,7 @@ def pandas():
             print(y)
             
 def regexGroup():
-        with open('filename2.csv', 'r', encoding = "utf-8") as f:
+        with open('filename2.txt', 'r', encoding = "utf-8") as f:
             lines = f.readlines()
         regex = r""""(?x)
                     ^\['(?P<artist>.+?)',
@@ -69,6 +69,7 @@ class Song:
             print(f" The possible artist(s) are: {artist_match}") 
             
 def main():
+    pandas()
     x = Song()
     x.search_song_lyrics()            
         

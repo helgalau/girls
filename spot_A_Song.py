@@ -52,29 +52,29 @@ class Song:
         pass
       
     def search_song_lyrics(self):
-    # Get input from user for song lyrics
-        search = input("What lyrics do you want to search for?: ")
-        artist_search = input("What is the name of the artist?: ")
-        with open('filename2.csv', 'r', encoding = "utf-8") as f:
-            lines = f.readlines()
-
+        regex_call = regexGroup()
         # Use a list comprehension to pull the lines that have the search the user wants
-            match = [line for line in lines if search in line]
-            if match:
-                print("Matching songs:")
-                for line in match:
-                    print(line)
+        lyrics_match = [match for match in regex_call if search in match]
+        if lyrics_match:
+            return lyrics_match
                     
-            artist_match = [match.group('artist') for match in regexGroup()]
-            print(f" The possible artist(s) are: {artist_match}") 
+        artist_match = [match.group('artist') for match in regexGroup()]
+        if artist_match:
+            return artist_match 
             
     def artist_and_song():
         pass
     
     
 def main():
-    x = Song()
-    x.search_song_lyrics()            
-        
-    if __name__ == "__main__":
-        main()
+    # Get input from user for song lyrics and artist name
+     lyrics_search = input("What lyrics do you want to search for?: ")
+     artist_search = input("What is the name of the artist?: ")
+     x = Song()
+     x.search_song_lyrics()
+     # Displays the matching songs and artists
+     print(f"The possible matching song(s) are: {lyrics_match}")          
+     print(f" The possible artist(s) are: {artist_match}")   
+     
+if __name__ == "__main__":
+     main()

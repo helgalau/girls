@@ -49,7 +49,8 @@ def regexGroup():
         
 class Song:
     def __init__(self):
-        pass
+        self.arists = []
+        self.lyrics = []
       
     def search_song_lyrics(self, lyrics_search, artist_search):
         regex_call = regexGroup()
@@ -71,7 +72,7 @@ def main():
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist?: ")
      x = Song()
-     x.search_song_lyrics()
+     x.search_song_lyrics(lyrics_search, artist_search)
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x.lyrics_match}")          
      print(f" The possible artist(s) are: {x.artist_match}")   

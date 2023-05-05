@@ -51,6 +51,8 @@ class Song:
     def __init__(self):
         self.arists = []
         self.lyrics = []
+        self.links = []
+        self.duration = []
       
     def search_song_lyrics(self, lyrics_search, artist_search):
         regex_call = regexGroup()

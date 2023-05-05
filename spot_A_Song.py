@@ -62,6 +62,10 @@ class Song:
         if artist_match:
             return artist_match 
             
+    def artist_and_song():
+        pass
+    
+    
 def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")

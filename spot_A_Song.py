@@ -2,7 +2,7 @@
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 import pandas as pd 
 import re
-from sklearn.feature_extraction.text import TfidfVectorizer 
+#from sklearn.feature_extraction.text import TfidfVectorizer 
 
 def pandas():
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
@@ -63,8 +63,8 @@ class Song:
         if artist_match:
             return artist_match 
             
-    def artist_and_song():
-        pass
+    def __str__(self):
+        return ""
     
     
 def main():

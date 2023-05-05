@@ -69,8 +69,10 @@ class Song:
             print(f" The possible artist(s) are: {artist_match}") 
             
 def main():
-    x = Song()
-    x.search_song_lyrics()            
+     search = input("What lyrics do you want to search for?: ")
+     artist_search = input("What is the name of the artist?: ")
+     x = Song()
+     x.search_song_lyrics()            
         
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+     main()

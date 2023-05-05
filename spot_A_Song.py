@@ -49,29 +49,41 @@ def regexGroup():
         
 class Song:
     def __init__(self):
-        pass
+        self.arists = []
+        self.lyrics = []
+        self.links = []
+        self.duration = []
       
-    def search_song_lyrics(self):
-    # Get input from user for song lyrics
-        search = input("What lyrics do you want to search for?: ")
-        artist_search = input("What is the name of the artist?: ")
-        with open('filename2.csv', 'r', encoding = "utf-8") as f:
-            lines = f.readlines()
-
+    def search_song_lyrics(self, lyrics_search, artist_search):
+        regex_call = regexGroup()
         # Use a list comprehension to pull the lines that have the search the user wants
-            match = [line for line in lines if search in line]
-            if match:
-                print("Matching songs:")
-                for line in match:
-                    print(line)
+        lyrics_match = [match for match in regex_call if artist_search in match]
+        if lyrics_match:
+            return lyrics_match
                     
-            artist_match = [match.group('artist') for match in regexGroup()]
-            print(f" The possible artist(s) are: {artist_match}") 
+        artist_match = [match.group('artist') for match in regexGroup()]
+        if artist_match:
+            return artist_match 
             
-def main():
-    pandas()
-    x = Song()
-    x.search_song_lyrics()            
+    def __str__(self):
+        """Give link and duration for the top 3 matches.
+        """
         
-    if __name__ == "__main__":
-        main()
+        
+        return ""
+        
+        
+    
+    
+def main():
+    # Get input from user for song lyrics and artist name
+     lyrics_search = input("What lyrics do you want to search for?: ")
+     artist_search = input("What is the name of the artist?: ")
+     x = Song()
+     x.search_song_lyrics(lyrics_search, artist_search)
+     # Displays the matching songs and artists
+     print(f"The possible matching song(s) are: {x.lyrics_match}")          
+     print(f" The possible artist(s) are: {x.artist_match}")   
+     
+if __name__ == "__main__":
+     main()

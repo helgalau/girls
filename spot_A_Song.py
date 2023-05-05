@@ -83,13 +83,6 @@ class Song:
             return artist_match 
             
     def __str__(self):
-<<<<<<< HEAD
-=======
-        """Give link and duration for the top 3 matches.
-        """
-        
-        
->>>>>>> 0777b9faec51eaee79e80d6eb70cc000d2537a6b
         return ""
         
         

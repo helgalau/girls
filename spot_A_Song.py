@@ -20,26 +20,27 @@ def pandas():
     #x= df[df["artist"] == "ABBA"].values.tolist()
     ## if they know the artist, we can search from here or use regex/list comp
 
-    with open('filename2.txt', 'w') as f:
+    with open('filename2.txt', 'w+', encoding = "utf-8") as f:
         for items in x:
+            
+            print(items)
             f.write("%s\n" % items)
 
-    with open('filename2.txt', 'r') as g:
+    with open('filename2.txt', 'r', encoding = "utf-8") as g:
         for y in g:
             print(y)
             
 def regexGroup():
         with open('filename2.txt', 'r', encoding = "utf-8") as f:
             lines = f.readlines()
-        regex = r""""(?x)
-                    ^\['(?P<artist>.+?)',
-                    \s'(?P<name> .+?)',
-                    \s\"(?P<lyrics> .+?)\",
-                    \s'(?P<spotifyLink> .+?)',
-                    \s'(?P<albumName> .+?)',
-                    \s'(?P<albumType> .+?)',
-                    \s'(?P<track> .+?)',
-                    \s(?P<duration> .+?),
+        regex = r"""(?xm)^\['(?P<artist>.+?)',
+                    \s'(?P<name>.+?)',
+                    \s\"(?P<lyrics>.+?)\",
+                    \s'(?P<spotifyLink>.+?)',
+                    \s'(?P<albumName>.+?)',
+                    \s'(?P<albumType>.+?)',
+                    \s'(?P<track>.+?)',
+                    \s(?P<duration>.+?),
                     \s(?P<youtube>.+?)',
                     \s(?P<views>.+?),
                     \s(?P<streams>.+?)]
@@ -72,15 +73,15 @@ class Song:
         """
         regex_matches = regexGroup()
         # Use list comprehension to pull matching lyrics
-        lyrics_match = [match for match in regex_matches if lyrics_search
+        self.lyrics_match = [match for match in regex_matches if lyrics_search
                         in match.group('lyrics')]
-        if lyrics_match:
-            return lyrics_match
+        if self.lyrics_match:
+            return self.lyrics_match
         #Use list comprehension to pull matching artists        
-        artist_match = [match.group('artist') for match in regex_matches 
+        self.artist_match = [match.group('artist') for match in regex_matches 
                         if artist_search in match.group('artist')]
-        if artist_match:
-            return artist_match 
+        if self.artist_match:
+            return self.artist_match 
             
     def __str__(self):
         return ""

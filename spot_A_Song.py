@@ -68,6 +68,10 @@ class Song:
             artist_match = [match.group('artist') for match in regexGroup()]
             print(f" The possible artist(s) are: {artist_match}") 
             
+    def artist_and_song():
+        pass
+    
+    
 def main():
     x = Song()
     x.search_song_lyrics()            

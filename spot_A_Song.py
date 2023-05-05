@@ -66,12 +66,13 @@ class Song:
             return artist_match 
             
     def __str__(self):
-        link = ""
-        duration = ""
-        for link, duration in self.lyrics, self.duration:
-            pass
+        """Give link and duration for the top 3 matches.
+        """
+        
         
         return ""
+        
+        
     
     
 def main():

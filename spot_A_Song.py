@@ -88,10 +88,7 @@ class Song:
         """
         
         
-        return ""
-        
-        
-    
+        return ""     
     
 def main():
     # Get input from user for song lyrics and artist name

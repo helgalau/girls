@@ -96,8 +96,11 @@ class Song:
         return lyrics_match, artist_match 
             
     def __str__(self):
-        return ""
-         
+        """Give link and duration for the top 3 matches.
+        """
+        
+        
+        return ""     
     
 def main():
     # Get input from user for song lyrics and artist name

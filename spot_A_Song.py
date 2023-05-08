@@ -31,9 +31,10 @@ def pandas():
         for items in x:
             f.write("%s\n" % items)
 
-    with open('filename2.txt', 'r') as g:
-        for y in g:
-            print(y)
+    #with open('filename2.txt', 'r') as g:
+       # for y in g:
+            #print(y)
+          #  pass
             
 def regexGroup():
     """Groups the information from the file that contains the song information.
@@ -43,6 +44,7 @@ def regexGroup():
     """
     with open('filename2.txt', 'r', encoding = "utf-8") as f:
         lines = f.readlines()
+        lines = ''.join(lines)
     regex = r"""(?xm)^\['(?P<artist>.+?)',
                 \s'(?P<name>.+?)',
                 \s\"(?P<lyrics>.+?)\",
@@ -55,7 +57,7 @@ def regexGroup():
                 \s(?P<views>.+?),
                 \s(?P<streams>.+?)\]
             """
-    match = re.search(regex, lines)
+    match = re.finditer(regex, lines)
     return match
         
 class Song:
@@ -68,7 +70,7 @@ class Song:
         self.links = []
         self.duration = []
       
-    def search_song_lyrics(self, lyrics_search, artist_search):
+    def search_song_lyrics(self, lyrics_search, artist_search = "not given"):
         """ Finds a match for the lyrics and the artist that
             the user inputed.
             
@@ -82,16 +84,16 @@ class Song:
         
         """
         regex_matches = regexGroup()
+        
         # Use list comprehension to pull matching lyrics
         lyrics_match = [match for match in regex_matches if lyrics_search
                         in match.group('lyrics')]
-        if lyrics_match:
-            return lyrics_match
-        #Use list comprehension to pull matching artists        
-        artist_match = [match for match in regex_matches if artist_search
+        if artist_search != "not given": 
+            artist_match = [match for match in regex_matches if artist_search
                         in match.group('artist')]
-        if artist_match:
-            return lyrics_match, artist_match 
+        #return lyrics_match
+        #Use list comprehension to pull matching artists        
+        return lyrics_match, artist_match 
             
     def __str__(self):
         return ""
@@ -100,12 +102,12 @@ class Song:
 def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")
-     artist_search = input("What is the name of the artist?: ")
+     artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
      x = Song()
-     x.search_song_lyrics(lyrics_search, artist_search)
+     results = x.search_song_lyrics(lyrics_search, artist_search)
      # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {x.lyrics_match}")          
-     print(f" The possible artist(s) are: {x.artist_match}")   
+     print(f"The possible matching song(s) are: {results}, and {results}")          
+     #print(f" The possible artist(s) are: {x.artist_match}")   
      
 if __name__ == "__main__":
      main()

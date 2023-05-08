@@ -2,7 +2,6 @@
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 import pandas as pd 
 import re
-#from sklearn.feature_extraction.text import TfidfVectorizer 
 
 def pandas():
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
@@ -29,10 +28,11 @@ def pandas():
     with open('filename2.txt', 'r') as g:
         for y in g:
             print(y)
-            
+
 def regexGroup():
-        with open('filename3.txt', 'r', encoding = "utf-8") as f:
-            lines = f.readlines()
+    with open('filename2.txt', 'r', encoding = "utf-8") as f:
+        lines = f.readlines()
+        text = ''.join(lines)
         regex = r"""(?xm)^\['(?P<artist>.+?)',
                     \s'(?P<name>.+?)',
                     \s\"(?P<lyrics>.+?)\",
@@ -45,9 +45,11 @@ def regexGroup():
                     \s(?P<views>.+?),
                     \s(?P<streams>.+?)\]
                 """
-        match = re.search(regex, lines)
+
+        match = re.search(regex, text)
         return match
-        
+    
+
 class Song:
     def __init__(self):
         """Initializes the artists, lyrics, links, and durations
@@ -84,15 +86,13 @@ class Song:
             return self.artist_match 
             
     def __str__(self):
-        """Give link and duration for the top 3 matches.
+        """Give link and duration for the top match.
         """
         
         
         return ""
         
-        
-    
-    
+
 def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")

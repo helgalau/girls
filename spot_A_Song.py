@@ -29,8 +29,6 @@ def pandas():
 
     with open('filename2.txt', 'w') as f:
         for items in x:
-            
-            print(items)
             f.write("%s\n" % items)
 
     with open('filename2.txt', 'r') as g:
@@ -85,32 +83,25 @@ class Song:
         """
         regex_matches = regexGroup()
         # Use list comprehension to pull matching lyrics
-        self.lyrics_match = [match for match in regex_matches if lyrics_search
+        lyrics_match = [match for match in regex_matches if lyrics_search
                         in match.group('lyrics')]
-        if self.lyrics_match:
-            return self.lyrics_match
+        if lyrics_match:
+            return lyrics_match
         #Use list comprehension to pull matching artists        
-        self.artist_match = [match.group('artist') for match in regex_matches 
-                        if artist_search in match.group('artist')]
-        if self.artist_match:
-            return self.artist_match 
+        artist_match = [match for match in regex_matches if artist_search
+                        in match.group('artist')]
+        if artist_match:
+            return lyrics_match, artist_match 
             
     def __str__(self):
-        """Give link and duration for the top 3 matches.
-        """
-        
-        
         return ""
-        
-        
-    
+         
     
 def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist?: ")
      x = Song()
-     pandas()
      x.search_song_lyrics(lyrics_search, artist_search)
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x.lyrics_match}")          

@@ -1,3 +1,4 @@
+"""I think we need a docstring for the project?"""
 ## link to csv -> https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 import pandas as pd 
@@ -5,13 +6,19 @@ import re
 #from sklearn.feature_extraction.text import TfidfVectorizer 
 
 def pandas():
+    """Opens up the two csv files containing the songs' information and 
+    combines them. Then the combined data is turned into a list that is stored in a txt file.
+    
+    returns?? filename2?
+    """
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
     songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
     songs = songs.drop("link", axis = 1)
     song_info = song_info.drop(["Danceability","Energy", "Key",
                             "Loudness","Speechiness","Acousticness",
-                            "Instrumentalness","Liveness", "Valence", "Tempo", "Title", "Channel", "Likes", 
-                            "Comments","Description","Licensed","official_video","Unnamed: 0"], axis = 1)
+                            "Instrumentalness","Liveness", "Valence", "Tempo",
+                            "Title", "Channel", "Likes", "Comments","Description",
+                            "Licensed","official_video","Unnamed: 0"], axis = 1)
 
     df = songs.merge(song_info, left_on = ["artist","song"], right_on= ["Artist","Track"])
     df = df.drop("Artist", axis = 1)
@@ -31,22 +38,27 @@ def pandas():
             print(y)
             
 def regexGroup():
-        with open('filename3.txt', 'r', encoding = "utf-8") as f:
-            lines = f.readlines()
-        regex = r"""(?xm)^\['(?P<artist>.+?)',
-                    \s'(?P<name>.+?)',
-                    \s\"(?P<lyrics>.+?)\",
-                    \s'(?P<spotifyLink>.+?)',
-                    \s'(?P<albumName>.+?)',
-                    \s'(?P<albumType>.+?)',
-                    \s'(?P<track>.+?)',
-                    \s(?P<duration>.+?),
-                    \s(?P<youtube>.+?)',
-                    \s(?P<views>.+?),
-                    \s(?P<streams>.+?)\]
-                """
-        match = re.search(regex, lines)
-        return match
+    """Groups the information from the file that contains the song information.
+    
+    Returns:
+        match(list of str)    
+    """
+    with open('filename2.txt', 'r', encoding = "utf-8") as f:
+        lines = f.readlines()
+    regex = r"""(?xm)^\['(?P<artist>.+?)',
+                \s'(?P<name>.+?)',
+                \s\"(?P<lyrics>.+?)\",
+                \s'(?P<spotifyLink>.+?)',
+                \s'(?P<albumName>.+?)',
+                \s'(?P<albumType>.+?)',
+                \s'(?P<track>.+?)',
+                \s(?P<duration>.+?),
+                \s(?P<youtube>.+?)',
+                \s(?P<views>.+?),
+                \s(?P<streams>.+?)\]
+            """
+    match = re.search(regex, lines)
+    return match
         
 class Song:
     def __init__(self):

@@ -44,7 +44,7 @@ def regexGroup():
     Returns:
         match(list of str)    
     """
-    with open('filename2.txt', 'r', encoding = "utf-8") as f:
+    with open('filename2.txt', 'r', encoding = "ANSI") as f:
         lines = f.readlines()
         text = ''.join(lines)
     regex = r"""(?xm)^\['(?P<artist>.+?)',
@@ -59,7 +59,7 @@ def regexGroup():
                 \s(?P<views>.+?),
                 \s(?P<streams>.+?)\]
             """
-    match = re.findall(regex, text)
+    match = re.finditer(regex, text)
     return match
         
 class Song:
@@ -85,19 +85,22 @@ class Song:
             artist_match: the matching artist
         
         """
-        match = regexGroup()
+        reg_match = regexGroup()
         #for match in regex_matches
-        lyrics_match = [match.group('name') for match in match if
-                        str(lyrics_search) in match.group('lyrics')]
+       
+        lyrics_match = [match.group('name') for match in reg_match if
+                        lyrics_search in match.group('lyrics')]
+        
         if artist_search != "not given": 
-            artist_match = [match.group('name') for match in match if
-                            str(artist_search) in match.group('artist')]
-           # return lyrics_match, artist_match 
+           artist_match = [match.group('name') for match in lyrics_match if
+                          artist_search in match.group('artist')]
+        
+           # return lyrics_match, artist_match
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-        music_tuple = lyrics_match, artist_match 
-        return music_tuple
+         
+        return lyrics_match
             
     def __str__(self):
         """Give link and duration for the top 3 matches.

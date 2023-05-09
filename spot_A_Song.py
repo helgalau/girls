@@ -93,14 +93,15 @@ class Song:
                         in match.group('artist')]
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-        return lyrics_match, artist_match 
+        music_tuple = lyrics_match, artist_match 
+        return music_tuple
             
     def __str__(self):
         """Give link and duration for the top 3 matches.
         """
         
         
-        return ""     
+        return ""  
     
 def main():
     # Get input from user for song lyrics and artist name

@@ -9,7 +9,8 @@ def pandas():
     """Opens up the two csv files containing the songs' information and 
     combines them. Then the combined data is turned into a list that is stored in a txt file.
     
-    returns?? filename2?
+    Side effects:
+    Creates filename2 and populates it with 
     """
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
     songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
@@ -44,7 +45,7 @@ def regexGroup():
     """
     with open('filename2.txt', 'r', encoding = "utf-8") as f:
         lines = f.readlines()
-        lines = ''.join(lines)
+        text = ''.join(lines)
     regex = r"""(?xm)^\['(?P<artist>.+?)',
                 \s'(?P<name>.+?)',
                 \s\"(?P<lyrics>.+?)\",
@@ -57,7 +58,7 @@ def regexGroup():
                 \s(?P<views>.+?),
                 \s(?P<streams>.+?)\]
             """
-    match = re.finditer(regex, lines)
+    match = re.findall(regex, text)
     return match
         
 class Song:
@@ -83,17 +84,16 @@ class Song:
             artist_match: the matching artist
         
         """
-        regex_matches = regexGroup()
-        
-        # Use list comprehension to pull matching lyrics
-        lyrics_match = [match for match in regex_matches if lyrics_search
-                        in match.group('lyrics')]
+        match = regexGroup()
+        #for match in regex_matches
+        lyrics_match = [match.group('name') for match in match if str(lyrics_search) in match.group('lyrics')]
         if artist_search != "not given": 
-            artist_match = [match for match in regex_matches if artist_search
-                        in match.group('artist')]
+            artist_match = [match.group('name') for match in match if str(artist_search) in match.group('artist')]
+            return lyrics_match, artist_match 
+        # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-        return lyrics_match, artist_match 
+        return f"{lyrics_match} and {artist_match}"
             
     def __str__(self):
         """Give link and duration for the top 3 matches.
@@ -109,7 +109,7 @@ def main():
      x = Song()
      results = x.search_song_lyrics(lyrics_search, artist_search)
      # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {results}, and {results}")          
+     print(f"The possible matching song(s) are: {results}")          
      #print(f" The possible artist(s) are: {x.artist_match}")   
      
 if __name__ == "__main__":

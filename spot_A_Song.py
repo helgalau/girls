@@ -1,4 +1,5 @@
 """I think we need a docstring for the project?"""
+"""Use filename2.txt for seraching song lyrics"""
 ## link to csv -> https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
 import pandas as pd 

@@ -113,8 +113,6 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-         
-        return (lyrics_match[0], artist_search)
         
         #Data Visualization: Bar Graph for user's inputted song and danceability score
         df_song = x[x["song"] == song]
@@ -133,6 +131,8 @@ class Song:
         plt.xlabel("Song")
         plt.ylabel("Danceability Score")
         plt.title("Top 5 Songs by Danceability Score")
+         
+        return (lyrics_match[0], artist_search)
             
     
 def main():

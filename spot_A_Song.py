@@ -30,6 +30,9 @@ def pandas():
     x =df.to_numpy().tolist()
     #x= df[df["artist"] == "ABBA"].values.tolist()
     ## if they know the artist, we can search from here or use regex/list comp
+    
+    #I made a copy of the df so that I don't many any uncessary changes to the original one
+    df1 = df
 
     with open('filename2.txt', 'w') as f:
         for items in x:

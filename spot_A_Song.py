@@ -30,6 +30,9 @@ def pandas():
     x =df.to_numpy().tolist()
     #x= df[df["artist"] == "ABBA"].values.tolist()
     ## if they know the artist, we can search from here or use regex/list comp
+    
+    #I made a copy of the df so that I don't many any uncessary changes to the original one
+    df1 = df
 
     with open('filename2.txt', 'w') as f:
         for items in x:
@@ -110,8 +113,6 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-         
-        return (lyrics_match[0], artist_search)
         
         #Data Visualization: Bar Graph for user's inputted song and danceability score
         df_song = x[x["song"] == song]
@@ -130,6 +131,8 @@ class Song:
         plt.xlabel("Song")
         plt.ylabel("Danceability Score")
         plt.title("Top 5 Songs by Danceability Score")
+         
+        return (lyrics_match[0], artist_search)
             
     
 def main():

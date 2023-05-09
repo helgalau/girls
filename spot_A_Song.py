@@ -86,13 +86,16 @@ class Song:
         """
         reg_match = regexGroup()
         #for match in regex_matches
+        if artist_search == "not given":
+             lyrics_match = [match.group('name') for match in reg_match if
+                            lyrics_search in match.group('lyrics')]
+        else:
+            lyrics_match = [match.group('name') for match in reg_match if
+                            lyrics_search in match.group('lyrics') and artist_search in match.group('artist')]
        
-        lyrics_match = [match.group('name') for match in reg_match if
-                        lyrics_search in match.group('lyrics')]
-        
-        if artist_search != "not given": 
-           artist_match = [match.group('name') for match in lyrics_match if
-                          artist_search in match.group('artist')]
+        #if artist_search != "not given": 
+          # artist_match = [match.group('name') for match in lyrics_match if
+            #              artist_search in match.group('artist')]
         
            # return lyrics_match, artist_match
         # Use list comprehension to pull matching lyrics

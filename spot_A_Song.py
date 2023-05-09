@@ -118,8 +118,9 @@ def main():
      artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
      x = Song()
      results = x.search_song_lyrics(lyrics_search, artist_search)
+     results2 = ', '.join(results)
      # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {results}")          
+     print(f"The possible matching song(s) are: {results2}")          
      #print(f" The possible artist(s) are: {x.artist_match}")   
      
 if __name__ == "__main__":

@@ -37,6 +37,8 @@ def pandas():
        # for y in g:
             #print(y)
           #  pass
+          
+    return df
             
 def regexGroup():
     """Groups the information from the file that contains the song information.
@@ -103,14 +105,8 @@ class Song:
         #return lyrics_match
         #Use list comprehension to pull matching artists        
          
-        return lyrics_match
+        return (lyrics_match[0], artist_search)
             
-    def __str__(self):
-        """Give link and duration for the top 3 matches.
-        """
-        
-        
-        return ""  
     
 def main():
     # Get input from user for song lyrics and artist name
@@ -121,7 +117,44 @@ def main():
      results2 = ', '.join(results)
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {results2}")          
-     #print(f" The possible artist(s) are: {x.artist_match}")   
+     #print(f" The possible artist(s) are: {x.artist_match}")
+     
+     return results
+     
+     
+def unpack():
+    """ Utilize sequence unpacking to return the lyrics and artist name.
+    """
+    m = main()
+
+    lyrics, artist = m[0], m[1]
+  
+    return lyrics, artist
+    
+
+def __str__(self):
+  """Return link and duration for the top match.
+  
+  Returns:
+    (str): Song details with name, links, and length
+  """
+  u = unpack()
+  df = pandas()
+  if u[1] != 'not given':
+    filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
+  else:
+    filtered = df[(df['song'] == u[0])]
+
+  yt_link = str(filtered['Url_youtube']).split()[1]
+  sp_link = str(filtered['Url_spotify']).split()[1]
+  dur = str(filtered['Duration_ms']).split()[1]
+  duration = "%.2f" % ((dur)/60000)
+
+
+  return f"""Song: {u[0]} by {u[1]}
+            Youtube Link: {yt_link}
+            Spotify Link: {sp_link}
+            Song length: {duration[0]} minutes and {duration[2:]} seconds"""
      
 if __name__ == "__main__":
      main()

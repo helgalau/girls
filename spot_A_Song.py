@@ -28,18 +28,11 @@ def mergefiles():
     df = df.drop("Artist", axis = 1)
     df = df.drop("Track", axis = 1)
     x =df.to_numpy().tolist()
-    #x= df[df["artist"] == "ABBA"].values.tolist()
-    ## if they know the artist, we can search from here or use regex/list comp
-
+    
     with open('filename2.txt', 'w') as f:
-        for items in x:
-            f.write("%s\n" % items)
-
-    #with open('filename2.txt', 'r') as g:
-       # for y in g:
-            #print(y)
-          #  pass
-          
+            for items in x:
+                f.write("%s\n" % items)
+                
     return df
             
 def regexGroup():
@@ -75,6 +68,7 @@ class Song:
         self.lyrics = []
         self.links = []
         self.duration = []
+        self.datafr = mergefiles()
       
     def search_song_lyrics(self, lyrics_search, artist_search = "not given"):
         """ Finds a match for the lyrics and the artist that
@@ -117,13 +111,11 @@ class Song:
     def check_availability(self):
         #Conditional Expression
         return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
-        
-        search_song_lyrics()
         #NO
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df = mergefiles()
+        df = self.datafr
         
         df_song = df[df["song"] == song]
         
@@ -145,13 +137,34 @@ class Song:
         top_5_songs_plot_results = plt.show()
         
     
-    def unpack(self):
-        """ Utilize sequence unpacking to return the lyrics and artist name.
-        """
-        s = Song()
-        lyrics, artist = s.lyrics[0], s.artists[0]
-    
-        return lyrics, artist
+    def get_duration(self):
+        df = mergefiles()
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
+        else:
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
+        dur = str(filtered['Duration_ms']).split()[1]
+        duration = "%.2f" % (float(dur)/60000)
+        
+        return duration
+        
+    def get_links(self):
+        df = mergefiles()
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
+        else:
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
+
+        yt_link = str(filtered['Url_youtube']).split()[1]
+        sp_link = str(filtered['Url_spotify']).split()[1]
+        
+        return yt_link, sp_link
             
     def __str__(self):
         """Return link and duration for the top match.
@@ -159,23 +172,12 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        df = mergefiles()
-        print(self.lyrics[0], self.artists[0])
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.lyrics[0])) & 
-                          (df['artist'] == self.artists[0])]
-        else:
-            filtered = df[(df['song'].isin(self.lyrics[0]))]
-
-        yt_link = str(filtered['Url_youtube']).split()[1]
-        sp_link = str(filtered['Url_spotify']).split()[1]
-        dur = str(filtered['Duration_ms']).split()[1]
-        duration = "%.2f" % (float(dur)/60000)
-
+        youtube, spotify = get_links()
+        duration = get_duration()
 
         return f""" Song: {self.lyrics[0]} by {self.artists[0]}
-                    Youtube Link: {yt_link}
-                    Spotify Link: {sp_link}
+                    Youtube Link: {youtube}
+                    Spotify Link: {spotify}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""
     
 def main():

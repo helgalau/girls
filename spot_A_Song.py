@@ -8,7 +8,7 @@ import pandas as pd
 import re
 #from sklearn.feature_extraction.text import TfidfVectorizer 
 
-def pandas():
+def mergefiles():
     """Opens up the two csv files containing the songs' information and 
     combines them. Then the combined data is turned into a list that is stored in a txt file.
     
@@ -113,13 +113,15 @@ class Song:
     
     def check_availability(self):
         #Conditional Expression
-        print("Sorry, this data is currently unavailable!") if (lyrics_search not in x) or (artist_search not in x) else None
+        
+        return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
+        
         search_song_lyrics()
-
+        #NO
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df1 = pandas()
+        df1 = mergefiles()
         
         df_song = df1[df1["song"] == song]
         
@@ -139,7 +141,6 @@ class Song:
         plt.title("Top 5 Songs by Danceability Score")
         top_5_songs_plot_results = plt.show()
         
-       # search_song_lyrics() 
     
     def unpack(self):
         """ Utilize sequence unpacking to return the lyrics and artist name.
@@ -156,7 +157,7 @@ class Song:
             (str): Song details with name, links, and length
         """
         u = self.unpack()
-        df = pandas()
+        df = mergefiles()
         if u[1] != 'not given':
             filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
         else:

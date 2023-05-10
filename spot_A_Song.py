@@ -138,34 +138,21 @@ class Song:
         top_5_songs_plot_results = plt.show()
         
     
-    def get_duration(self):
+    def get_duration_and_links(self):
         df = mergefiles()
+
         if self.artists[0] != 'not given':
             filtered = df[(df['song'].isin(self.lyrics[0])) & 
                           (df['artist'] == self.artists[0])]
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
         else:
             filtered = df[(df['song'].isin(self.lyrics[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
         duration = "%.2f" % (float(dur)/60000)
-        
-        return duration
-        
-    def get_links(self):
-        df = mergefiles()
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.lyrics[0])) & 
-                          (df['artist'] == self.artists[0])]
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
-        else:
-            filtered = df[(df['song'].isin(self.lyrics[0]))]
-
         yt_link = str(filtered['Url_youtube']).split()[1]
         sp_link = str(filtered['Url_spotify']).split()[1]
         
-        return yt_link, sp_link
+        return duration, yt_link, sp_link
+        
             
     def __str__(self):
         """Return link and duration for the top match.
@@ -173,8 +160,7 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        youtube, spotify = get_links()
-        duration = get_duration()
+        duration, youtube, spotify = self.get_duration_and_links()
 
         return f""" Song: {self.lyrics[0]} by {self.artists[0]}
                     Youtube Link: {youtube}
@@ -183,6 +169,7 @@ class Song:
     
 def main():
     # Get input from user for song lyrics and artist name
+     print("Welcome to Spot-A-Song!")
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
      x = Song()
@@ -194,7 +181,7 @@ def main():
     
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x}")          
-     danceability_search = input("Want to add this song to your party playslist? Check to see if you can dance to this song! What is your song name? ")
+     danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
      #Displays the first bar graph of the user's inputted song and danceability score
      x.data_vis(danceability_search)
      

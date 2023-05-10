@@ -133,6 +133,14 @@ class Song:
         plt.title("Top 5 Songs by Danceability Score")
          
         return (lyrics_match[0], artist_search)
+    
+    def unpack():
+        """ Utilize sequence unpacking to return the lyrics and artist name.
+        """
+        m = main()
+        lyrics, artist = m[0], m[1]
+    
+        return lyrics, artist
             
     def __str__(self):
         """Return link and duration for the top match.
@@ -175,15 +183,6 @@ def main():
      
      return results
      
-     
-def unpack():
-    """ Utilize sequence unpacking to return the lyrics and artist name.
-    """
-    m = main()
-
-    lyrics, artist = m[0], m[1]
-  
-    return lyrics, artist
     
      
 if __name__ == "__main__":

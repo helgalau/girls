@@ -111,6 +111,7 @@ class Song:
     def check_availability(self):
         #Conditional Expression
         return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
+        
         #NO
     
     def data_vis(self, song):

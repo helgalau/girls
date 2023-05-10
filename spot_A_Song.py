@@ -86,13 +86,14 @@ class Song:
         reg_match = regexGroup()
        
         #for match in regex_matches
+        
+
         if artist_search == "not given":
              lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics')]
         else:
             lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics') and artist_search in match.group('artist')]
-            
         self.lyrics.append(lyrics_match)
         self.artists.append(artist_search)
        
@@ -104,15 +105,24 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
- 
+
         return (lyrics_match[0], artist_search)
     
     
-    def check_availability(self):
-        #Conditional Expression
-        return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
+    def check_availability(lyrics_search, artist_search = "not given"):
+        reg_match = regexGroup()
+        # for song in x:
+        if artist_search == "not given":
+            match = [match.group('lyrics') for match in reg_match if
+                            lyrics_search in match.group('lyrics')]
+        else: 
+            match = [match.group('artist') for match in reg_match if
+                            artist_search in match.group('artist')]
         
-        #NO
+        #Conditional Expression
+        return False if match == [] else True
+            
+
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
@@ -169,21 +179,33 @@ class Song:
     
 def main():
     # Get input from user for song lyrics and artist name
-     print("Welcome to Spot-A-Song!")
-     lyrics_search = input("What lyrics do you want to search for?: ")
-     artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
-     x = Song()
-     #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score
-     
-     
-     results = x.search_song_lyrics(lyrics_search, artist_search)
-     results2 = ', '.join(results)
+    print("Welcome to Spot-A-Song!")
+    availabilityCheck = False
+    artistCheck = False
+    lyrics_search = input("What lyrics do you want to search for?: ")
+    #Iterates until user inputs a valid input (lyric and artist) for the check_availability method
+    while(availabilityCheck is False):
+        if (Song.check_availability(lyrics_search) is True):
+            artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            while(Song.check_availability(lyrics_search, artist_search) is False):
+                print("Invalid artist")
+                artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            availabilityCheck = True
+        else:
+            print("Invalid lyrics")
+            lyrics_search = input("What lyrics do you want to search for?: ")
+
+    # artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+    x = Song()
     
-     # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {x}")          
-     danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
-     #Displays the first bar graph of the user's inputted song and danceability score
-     x.data_vis(danceability_search)
+    results = x.search_song_lyrics(lyrics_search, artist_search)
+    
+    # Displays the matching songs and artists
+    print(f"The possible matching song(s) are: {x}")   
+    
+    #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score       
+    danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
+    x.data_vis(danceability_search)
      
      
 if __name__ == "__main__":

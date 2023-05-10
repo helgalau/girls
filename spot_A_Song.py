@@ -113,7 +113,7 @@ class Song:
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df1 = self.datafr
+        df = self.datafr
         
         df_song = df[df["song"] == song]
         
@@ -149,15 +149,11 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        df = mergefiles()
+        df = self.datafr
         print(self.lyrics[0], self.artists[0])
         if self.artists[0] != 'not given':
             filtered = df[(df['song'].isin(self.lyrics[0])) & 
                           (df['artist'] == self.artists[0])]
-        u = self.unpack()
-        df = self.datafr
-        if u[1] != 'not given':
-            filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
         else:
             filtered = df[(df['song'].isin(self.lyrics[0]))]
 

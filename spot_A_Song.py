@@ -149,7 +149,14 @@ class Song:
         top_5_songs_plot_results = plt.show()
         
     
-    def get_duration_and_links(self):
+    def get_duration_and_links(self): 
+        """Gets the duration and YouTube and Spotify links from dataframe.
+        
+        Returns:
+            duration (str): length of song in minutes and seconds
+            yt_link (str): YouTube link for song
+            sp_link (str): Spotify link for song 
+        """
         df = mergefiles()
         if self.artists[0] != 'not given':
             filtered = df[(df['song'].isin(self.lyrics[0])) & 

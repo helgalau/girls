@@ -28,18 +28,6 @@ def mergefiles():
     df = df.drop("Artist", axis = 1)
     df = df.drop("Track", axis = 1)
     x =df.to_numpy().tolist()
-    #x= df[df["artist"] == "ABBA"].values.tolist()
-    ## if they know the artist, we can search from here or use regex/list comp
-
-    with open('filename2.txt', 'w') as f:
-        for items in x:
-            f.write("%s\n" % items)
-
-    #with open('filename2.txt', 'r') as g:
-       # for y in g:
-            #print(y)
-          #  pass
-          
     return df
             
 def regexGroup():
@@ -75,6 +63,10 @@ class Song:
         self.lyrics = []
         self.links = []
         self.duration = []
+        self.datafr = mergefiles()
+        with open('filename2.txt', 'w') as f:
+            for items in self.datafr:
+                f.write("%s\n" % items)
       
     def search_song_lyrics(self, lyrics_search, artist_search = "not given"):
         """ Finds a match for the lyrics and the artist that
@@ -118,13 +110,11 @@ class Song:
         #Conditional Expression
         
         return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
-        
-        search_song_lyrics()
         #NO
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df1 = mergefiles()
+        df1 = self.datafr
         
         df_song = df1[df1["song"] == song]
         
@@ -159,8 +149,8 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        u = unpack()
-        df = pandas()
+        u = self.unpack()
+        df = self.datafr
         if u[1] != 'not given':
             filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
         else:

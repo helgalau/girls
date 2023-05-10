@@ -28,6 +28,11 @@ def mergefiles():
     df = df.drop("Artist", axis = 1)
     df = df.drop("Track", axis = 1)
     x =df.to_numpy().tolist()
+    
+    with open('filename2.txt', 'w') as f:
+            for items in x:
+                f.write("%s\n" % items)
+                
     return df
             
 def regexGroup():
@@ -64,9 +69,6 @@ class Song:
         self.links = []
         self.duration = []
         self.datafr = mergefiles()
-        with open('filename2.txt', 'w') as f:
-            for items in self.datafr:
-                f.write("%s\n" % items)
       
     def search_song_lyrics(self, lyrics_search, artist_search = "not given"):
         """ Finds a match for the lyrics and the artist that
@@ -113,7 +115,7 @@ class Song:
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df1 = self.datafr
+        df = self.datafr
         
         df_song = df[df["song"] == song]
         

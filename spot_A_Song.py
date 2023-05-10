@@ -134,6 +134,29 @@ class Song:
          
         return (lyrics_match[0], artist_search)
             
+    def __str__(self):
+        """Return link and duration for the top match.
+        
+        Returns:
+            (str): Song details with name, links, and length
+        """
+        u = unpack()
+        df = pandas()
+        if u[1] != 'not given':
+            filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
+        else:
+            filtered = df[(df['song'] == u[0])]
+
+        yt_link = str(filtered['Url_youtube']).split()[1]
+        sp_link = str(filtered['Url_spotify']).split()[1]
+        dur = str(filtered['Duration_ms']).split()[1]
+        duration = "%.2f" % ((dur)/60000)
+
+
+        return f"""Song: {u[0]} by {u[1]}
+                    Youtube Link: {yt_link}
+                    Spotify Link: {sp_link}
+                    Song length: {duration[0]} minutes and {duration[2:]} seconds"""
     
 def main():
     # Get input from user for song lyrics and artist name
@@ -162,30 +185,6 @@ def unpack():
   
     return lyrics, artist
     
-
-def __str__(self):
-  """Return link and duration for the top match.
-  
-  Returns:
-    (str): Song details with name, links, and length
-  """
-  u = unpack()
-  df = pandas()
-  if u[1] != 'not given':
-    filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
-  else:
-    filtered = df[(df['song'] == u[0])]
-
-  yt_link = str(filtered['Url_youtube']).split()[1]
-  sp_link = str(filtered['Url_spotify']).split()[1]
-  dur = str(filtered['Duration_ms']).split()[1]
-  duration = "%.2f" % ((dur)/60000)
-
-
-  return f"""Song: {u[0]} by {u[1]}
-            Youtube Link: {yt_link}
-            Spotify Link: {sp_link}
-            Song length: {duration[0]} minutes and {duration[2:]} seconds"""
      
 if __name__ == "__main__":
      main()

@@ -137,13 +137,34 @@ class Song:
         top_5_songs_plot_results = plt.show()
         
     
-    def unpack(self):
-        """ Utilize sequence unpacking to return the lyrics and artist name.
-        """
-        s = Song()
-        lyrics, artist = s.lyrics[0], s.artists[0]
-    
-        return lyrics, artist
+    def get_duration(self):
+        df = mergefiles()
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
+        else:
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
+        dur = str(filtered['Duration_ms']).split()[1]
+        duration = "%.2f" % (float(dur)/60000)
+        
+        return duration
+        
+    def get_links(self):
+        df = mergefiles()
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'] == self.lyrics[0]) & (df['artist'] == self.artists[0])]
+        else:
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
+
+        yt_link = str(filtered['Url_youtube']).split()[1]
+        sp_link = str(filtered['Url_spotify']).split()[1]
+        
+        return yt_link, sp_link
             
     def __str__(self):
         """Return link and duration for the top match.
@@ -151,23 +172,12 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        df = self.datafr
-        print(self.lyrics[0], self.artists[0])
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.lyrics[0])) & 
-                          (df['artist'] == self.artists[0])]
-        else:
-            filtered = df[(df['song'].isin(self.lyrics[0]))]
-
-        yt_link = str(filtered['Url_youtube']).split()[1]
-        sp_link = str(filtered['Url_spotify']).split()[1]
-        dur = str(filtered['Duration_ms']).split()[1]
-        duration = "%.2f" % (float(dur)/60000)
-
+        youtube, spotify = get_links()
+        duration = get_duration()
 
         return f""" Song: {self.lyrics[0]} by {self.artists[0]}
-                    Youtube Link: {yt_link}
-                    Spotify Link: {sp_link}
+                    Youtube Link: {youtube}
+                    Spotify Link: {spotify}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""
     
 def main():

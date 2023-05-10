@@ -30,9 +30,6 @@ def pandas():
     x =df.to_numpy().tolist()
     #x= df[df["artist"] == "ABBA"].values.tolist()
     ## if they know the artist, we can search from here or use regex/list comp
-    
-    #I made a copy of the df so that I don't many any uncessary changes to the original one
-    df1 = df
 
     with open('filename2.txt', 'w') as f:
         for items in x:
@@ -93,9 +90,6 @@ class Song:
         
         """
         reg_match = regexGroup()
-        
-        #Conditional Expression
-        print("Sorry, this data is currently unavailable!") if (lyrics_search not in x) or (artist_search not in x) else None
        
         #for match in regex_matches
         if artist_search == "not given":
@@ -113,26 +107,38 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-        
+ 
+        return (lyrics_match[0], artist_search)
+    
+    
+    def check_availability():
+        #Conditional Expression
+        print("Sorry, this data is currently unavailable!") if (lyrics_search not in x) or (artist_search not in x) else None
+        search_song_lyrics()
+
+    
+    def data_vis():
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df_song = x[x["song"] == song]
+        df1 = pandas()
         
-        plt.bar(df_artist['artist'], df_artist['danceability'])
+        df_song = df1[df1["song"] == song]
+        
+        plt.bar(df_song['song'], df_song['danceability'])
         
         plt.xlabel("Song")
         plt.ylabel("Danceability")
         plt.title(f"Danceability for {song}")
         
         #Data Visualization #2: Sort the danceability score in descending order to get the top 5 danceability scores
-        top_5_dance_scores = x.sort_values('Danceability', ascending = False).head(5)
+        top_5_dance_scores = df1.sort_values('Danceability', ascending = False).head(5)
 
         plt.bar(top_5_dance_scores['song'], top_5_songs['Danceability'])
         plt.xticks(rotation=90)
         plt.xlabel("Song")
         plt.ylabel("Danceability Score")
         plt.title("Top 5 Songs by Danceability Score")
-         
-        return (lyrics_match[0], artist_search)
+        
+        search_song_lyrics() 
     
     def unpack():
         """ Utilize sequence unpacking to return the lyrics and artist name.
@@ -170,6 +176,7 @@ def main():
     # Get input from user for song lyrics and artist name
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+     danceability_search = input("Want to add this song to your party playslist? Check to see if you can dance to this song! What is your song name? ")
      #Displays the first bar graph of the user's inputted song and danceability score
      plot_results = plt.show()
      x = Song()

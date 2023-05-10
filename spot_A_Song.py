@@ -106,13 +106,8 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
-<<<<<<< HEAD
- 
-        return (lyrics_match, artist_search)
-=======
 
         return (lyrics_match[0], artist_search)
->>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
     
     
     def check_availability(lyrics_search, artist_search = "not given"):
@@ -157,13 +152,8 @@ class Song:
     def get_duration_and_links(self):
         df = mergefiles()
         if self.artists[0] != 'not given':
-<<<<<<< HEAD
-            filtered = df[(df['song'].isin(self.title[0])) & 
-                          (df['artist'] == (self.artists[0]))]
-=======
             filtered = df[(df['song'].isin(self.lyrics[0])) & 
                           (df['artist'] == self.artists[0])]
->>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
         else:
             filtered = df[(df['song'].isin(self.lyrics[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
@@ -189,17 +179,6 @@ class Song:
     
 def main():
     # Get input from user for song lyrics and artist name
-<<<<<<< HEAD
-     print("Welcome to Spot-A-Song!")
-     lyrics_search = input("What lyrics do you want to search for?: ")
-     artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
-     x = Song()
-     #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score
-     
-     
-     results = x.search_song_lyrics(lyrics_search, artist_search)
-     #results2 = ', '.join(results)
-=======
     print("Welcome to Spot-A-Song!")
     availabilityCheck = False
     artistCheck = False
@@ -218,7 +197,6 @@ def main():
 
     # artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
     x = Song()
->>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
     
     results = x.search_song_lyrics(lyrics_search, artist_search)
     

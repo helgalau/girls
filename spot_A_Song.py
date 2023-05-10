@@ -98,6 +98,9 @@ class Song:
         else:
             lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics') and artist_search in match.group('artist')]
+            
+        self.lyrics.append(lyrics_match)
+        self.artists.append(artist_search)
        
         #if artist_search != "not given": 
           # artist_match = [match.group('name') for match in lyrics_match if
@@ -143,8 +146,8 @@ class Song:
     def unpack():
         """ Utilize sequence unpacking to return the lyrics and artist name.
         """
-        m = main()
-        lyrics, artist = m[0], m[1]
+        s = Song()
+        lyrics, artist = s.lyrics[0], s.artists[0]
     
         return lyrics, artist
             
@@ -154,8 +157,8 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        u = unpack()
-        df = pandas()
+        u = self.unpack()
+        df = self.pandas()
         if u[1] != 'not given':
             filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
         else:

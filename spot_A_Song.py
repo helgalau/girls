@@ -138,9 +138,9 @@ class Song:
         
     
     def get_duration_and_links(self):
-        f = self.datafr
+        df = self.datafr
         if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+            filtered = df[(df['song'].isin(self.title[0])) & 
                           (df['artist'] == self.artists[0])]
             filtered = df[(df['song'].isin(self.title[0])) & (df['artist'] == (self.artists))]
         else:
@@ -158,14 +158,9 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-<<<<<<< HEAD
-        youtube, spotify = self.get_links()
-        duration = self.get_duration()
-=======
         duration, youtube, spotify = self.get_duration_and_links()
->>>>>>> 1f7699b988c69bc2c72213d931e3526c8da4c499
 
-        return f""" Song: {self.lyrics[0]} by {self.artists[0]}
+        return f""" Song: {self.title[0]} by {self.artists[0]}
                     Youtube Link: {youtube}
                     Spotify Link: {spotify}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""

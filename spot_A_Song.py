@@ -111,13 +111,13 @@ class Song:
         return (lyrics_match[0], artist_search)
     
     
-    def check_availability():
+    def check_availability(self):
         #Conditional Expression
         print("Sorry, this data is currently unavailable!") if (lyrics_search not in x) or (artist_search not in x) else None
         search_song_lyrics()
 
     
-    def data_vis():
+    def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
         df1 = pandas()
         
@@ -128,22 +128,22 @@ class Song:
         plt.xlabel("Song")
         plt.ylabel("Danceability")
         plt.title(f"Danceability for {song}")
-        
+        plot_results = plt.show()
         #Data Visualization #2: Sort the danceability score in descending order to get the top 5 danceability scores
         top_5_dance_scores = df1.sort_values('Danceability', ascending = False).head(5)
 
-        plt.bar(top_5_dance_scores['song'], top_5_songs['Danceability'])
+        plt.bar(top_5_dance_scores['song'], top_5_dance_scores['Danceability'])
         plt.xticks(rotation=90)
         plt.xlabel("Song")
         plt.ylabel("Danceability Score")
         plt.title("Top 5 Songs by Danceability Score")
+        top_5_songs_plot_results = plt.show()
         
        # search_song_lyrics() 
     
     def unpack(self):
         """ Utilize sequence unpacking to return the lyrics and artist name.
         """
-        m = main()
         ##?
         lyrics, artist = m[0], m[1]
     
@@ -186,14 +186,10 @@ def main():
     
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x}")          
-     #danceability_search = input("Want to add this song to your party playslist? Check to see if you can dance to this song! What is your song name? ")
+     danceability_search = input("Want to add this song to your party playslist? Check to see if you can dance to this song! What is your song name? ")
      #Displays the first bar graph of the user's inputted song and danceability score
-    # plot_results = plt.show()
-     #top_5_songs_plot_results = plt.show()
+     x.data_vis(danceability_search)
      
-     return results
-     
-    
      
 if __name__ == "__main__":
      main()

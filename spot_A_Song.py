@@ -65,7 +65,7 @@ class Song:
            of the songs in an empty list.
         """
         self.artists = []
-        self.title = []
+        self.lyrics = []
         self.links = []
         self.duration = []
         self.datafr = mergefiles()
@@ -95,7 +95,7 @@ class Song:
             lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics') and artist_search in match.group('artist')]
             
-        self.title.append(lyrics_match)
+        self.lyrics.append(lyrics_match)
         self.artists.append(artist_search)
        
         #if artist_search != "not given": 
@@ -150,17 +150,17 @@ class Song:
         
     
     def get_duration_and_links(self):
-        df = self.datafr
+        df = mergefiles()
         if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.title[0])) & 
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
                           (df['artist'] == self.artists[0])]
-            filtered = df[(df['song'].isin(self.title[0])) & (df['artist'] == (self.artists))]
         else:
-            filtered = df[(df['song'].isin(self.title[0]))]
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
         duration = "%.2f" % (float(dur)/60000)
         yt_link = str(filtered['Url_youtube']).split()[1]
         sp_link = str(filtered['Url_spotify']).split()[1]
+        
         return duration, yt_link, sp_link
         
             
@@ -172,7 +172,7 @@ class Song:
         """
         duration, youtube, spotify = self.get_duration_and_links()
 
-        return f""" Song: {self.title[0]} by {self.artists[0]}
+        return f""" Song: {self.lyrics[0]} by {self.artists[0]}
                     Youtube Link: {youtube}
                     Spotify Link: {spotify}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""

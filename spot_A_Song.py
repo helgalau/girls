@@ -13,7 +13,7 @@ def mergefiles():
     combines them. Then the combined data is turned into a list that is stored in a txt file.
     
     Side effects:
-    Creates filename2 and populates it with 
+    Creates filename2 and populates it with a dataframe information
     """
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
     songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
@@ -116,7 +116,6 @@ class Song:
     
     def check_availability(self):
         #Conditional Expression
-        
         return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
         
         search_song_lyrics()
@@ -124,18 +123,19 @@ class Song:
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
-        df1 = mergefiles()
+        df = mergefiles()
         
-        df_song = df1[df1["song"] == song]
+        df_song = df[df["song"] == song]
         
-        plt.bar(df_song['song'], df_song['danceability'])
+        plt.bar(df_song['song'], df_song['Danceability'])
         
         plt.xlabel("Song")
         plt.ylabel("Danceability")
         plt.title(f"Danceability for {song}")
         plot_results = plt.show()
+        
         #Data Visualization #2: Sort the danceability score in descending order to get the top 5 danceability scores
-        top_5_dance_scores = df1.sort_values('Danceability', ascending = False).head(5)
+        top_5_dance_scores = df.sort_values('Danceability', ascending = False).head(5)
 
         plt.bar(top_5_dance_scores['song'], top_5_dance_scores['Danceability'])
         plt.xticks(rotation=90)
@@ -159,20 +159,21 @@ class Song:
         Returns:
             (str): Song details with name, links, and length
         """
-        u = unpack()
-        df = pandas()
-        if u[1] != 'not given':
-            filtered = df[(df['song'] == u[0]) & (df['artist'] == u[1])]
+        df = mergefiles()
+        print(self.lyrics[0], self.artists[0])
+        if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
         else:
-            filtered = df[(df['song'] == u[0])]
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
 
         yt_link = str(filtered['Url_youtube']).split()[1]
         sp_link = str(filtered['Url_spotify']).split()[1]
         dur = str(filtered['Duration_ms']).split()[1]
-        duration = "%.2f" % ((dur)/60000)
+        duration = "%.2f" % (float(dur)/60000)
 
 
-        return f""" Song: {u[0]} by {u[1]}
+        return f""" Song: {self.lyrics[0]} by {self.artists[0]}
                     Youtube Link: {yt_link}
                     Spotify Link: {sp_link}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""

@@ -105,7 +105,7 @@ class Song:
         #return lyrics_match
         #Use list comprehension to pull matching artists        
  
-        return (lyrics_match[0], artist_search)
+        return (lyrics_match, artist_search)
     
     
     def check_availability(self):
@@ -141,8 +141,7 @@ class Song:
         df = self.datafr
         if self.artists[0] != 'not given':
             filtered = df[(df['song'].isin(self.title[0])) & 
-                          (df['artist'] == self.artists[0])]
-            filtered = df[(df['song'].isin(self.title[0])) & (df['artist'] == (self.artists))]
+                          (df['artist'] == (self.artists[0]))]
         else:
             filtered = df[(df['song'].isin(self.title[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
@@ -175,7 +174,7 @@ def main():
      
      
      results = x.search_song_lyrics(lyrics_search, artist_search)
-     results2 = ', '.join(results)
+     #results2 = ', '.join(results)
     
      # Displays the matching songs and artists
      print(f"The possible matching song(s) are: {x}")          

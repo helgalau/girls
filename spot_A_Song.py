@@ -65,7 +65,7 @@ class Song:
            of the songs in an empty list.
         """
         self.artists = []
-        self.title = []
+        self.lyrics = []
         self.links = []
         self.duration = []
         self.datafr = mergefiles()
@@ -86,6 +86,8 @@ class Song:
         reg_match = regexGroup()
        
         #for match in regex_matches
+        
+
         if artist_search == "not given":
              lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics')]
@@ -93,7 +95,7 @@ class Song:
             lyrics_match = [match.group('name') for match in reg_match if
                             lyrics_search in match.group('lyrics') and artist_search in match.group('artist')]
             
-        self.title.append(lyrics_match)
+        self.lyrics.append(lyrics_match)
         self.artists.append(artist_search)
        
         #if artist_search != "not given": 
@@ -104,14 +106,29 @@ class Song:
         # Use list comprehension to pull matching lyrics
         #return lyrics_match
         #Use list comprehension to pull matching artists        
+<<<<<<< HEAD
  
         return (lyrics_match, artist_search)
+=======
+
+        return (lyrics_match[0], artist_search)
+>>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
     
     
-    def check_availability(self):
+    def check_availability(lyrics_search, artist_search = "not given"):
+        reg_match = regexGroup()
+        # for song in x:
+        if artist_search == "not given":
+            match = [match.group('lyrics') for match in reg_match if
+                            lyrics_search in match.group('lyrics')]
+        else: 
+            match = [match.group('artist') for match in reg_match if
+                            artist_search in match.group('artist')]
+        
         #Conditional Expression
-        return ("unavailable") if (lyrics_search not in x) or (artist_search not in x) else "availible"
-        #NO
+        return False if match == [] else True
+            
+
     
     def data_vis(self, song):
         #Data Visualization: Bar Graph for user's inputted song and danceability score
@@ -138,16 +155,22 @@ class Song:
         
     
     def get_duration_and_links(self):
-        df = self.datafr
+        df = mergefiles()
         if self.artists[0] != 'not given':
+<<<<<<< HEAD
             filtered = df[(df['song'].isin(self.title[0])) & 
                           (df['artist'] == (self.artists[0]))]
+=======
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
+>>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
         else:
-            filtered = df[(df['song'].isin(self.title[0]))]
+            filtered = df[(df['song'].isin(self.lyrics[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
         duration = "%.2f" % (float(dur)/60000)
         yt_link = str(filtered['Url_youtube']).split()[1]
         sp_link = str(filtered['Url_spotify']).split()[1]
+        
         return duration, yt_link, sp_link
         
             
@@ -159,13 +182,14 @@ class Song:
         """
         duration, youtube, spotify = self.get_duration_and_links()
 
-        return f""" Song: {self.title[0]} by {self.artists[0]}
+        return f""" Song: {self.lyrics[0]} by {self.artists[0]}
                     Youtube Link: {youtube}
                     Spotify Link: {spotify}
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""
     
 def main():
     # Get input from user for song lyrics and artist name
+<<<<<<< HEAD
      print("Welcome to Spot-A-Song!")
      lyrics_search = input("What lyrics do you want to search for?: ")
      artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
@@ -175,12 +199,35 @@ def main():
      
      results = x.search_song_lyrics(lyrics_search, artist_search)
      #results2 = ', '.join(results)
+=======
+    print("Welcome to Spot-A-Song!")
+    availabilityCheck = False
+    artistCheck = False
+    lyrics_search = input("What lyrics do you want to search for?: ")
+    #Iterates until user inputs a valid input (lyric and artist) for the check_availability method
+    while(availabilityCheck is False):
+        if (Song.check_availability(lyrics_search) is True):
+            artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            while(Song.check_availability(lyrics_search, artist_search) is False):
+                print("Invalid artist")
+                artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            availabilityCheck = True
+        else:
+            print("Invalid lyrics")
+            lyrics_search = input("What lyrics do you want to search for?: ")
+
+    # artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+    x = Song()
+>>>>>>> b0d44cbbf8e4b2c6a97ae1914651b2db46e58683
     
-     # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {x}")          
-     danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
-     #Displays the first bar graph of the user's inputted song and danceability score
-     x.data_vis(danceability_search)
+    results = x.search_song_lyrics(lyrics_search, artist_search)
+    
+    # Displays the matching songs and artists
+    print(f"The possible matching song(s) are: {x}")   
+    
+    #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score       
+    danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
+    x.data_vis(danceability_search)
      
      
 if __name__ == "__main__":

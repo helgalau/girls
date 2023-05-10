@@ -137,28 +137,20 @@ class Song:
         top_5_songs_plot_results = plt.show()
         
     
-    def get_duration(self):
-        df = self.datafr
+    def get_duration_and_links(self):
+        f = self.datafr
         if self.artists[0] != 'not given':
+            filtered = df[(df['song'].isin(self.lyrics[0])) & 
+                          (df['artist'] == self.artists[0])]
             filtered = df[(df['song'].isin(self.title[0])) & (df['artist'] == (self.artists))]
         else:
             filtered = df[(df['song'].isin(self.title[0]))]
         dur = str(filtered['Duration_ms']).split()[1]
         duration = "%.2f" % (float(dur)/60000)
-        
-        return duration
-        
-    def get_links(self):
-        df = self.datafr
-        if self.artists[0] != 'not given':
-            filtered = df[(df['song'].isin(self.title[0])) & (df['artist']==(self.artists[0]))]
-        else:
-            filtered = df[(df['song'].isin(self.title[0]))]
-
         yt_link = str(filtered['Url_youtube']).split()[1]
         sp_link = str(filtered['Url_spotify']).split()[1]
+        return duration, yt_link, sp_link
         
-        return yt_link, sp_link
             
     def __str__(self):
         """Return link and duration for the top match.

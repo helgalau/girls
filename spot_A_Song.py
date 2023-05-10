@@ -55,12 +55,12 @@ def regexGroup():
                 \s(?P<views>.+?),
                 \s(?P<streams>.+?)\]
             """
-    match = re.search(regex, lines)
+    match = re.finditer(regex, lines)
     return match
         
 class Song:
     def __init__(self):
-        """Initializes the artists, lyrics, links, and durations
+        """Initializes the artists, lyrheics, links, and durations
            of the songs in an empty list.
         """
         self.artists = []

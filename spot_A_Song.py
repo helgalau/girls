@@ -167,22 +167,32 @@ class Song:
                     Song length: {duration[0]} minutes and {duration[2:]} seconds"""
     
 def main():
+    """
+    This function will take input (lyrics and artist) from the user, 
+    process that input, and produces a match to their desired inputs. 
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     # Get input from user for song lyrics and artist name
-     print("Welcome to Spot-A-Song!")
-     lyrics_search = input("What lyrics do you want to search for?: ")
-     artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
-     x = Song()
+    print("Welcome to Spot-A-Song!")
+    lyrics_search = input("What lyrics do you want to search for?: ")
+    artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+    x = Song()
      #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score
      
      
-     results = x.search_song_lyrics(lyrics_search, artist_search)
-     results2 = ', '.join(results)
+    results = x.search_song_lyrics(lyrics_search, artist_search)
+    results2 = ', '.join(results)
     
-     # Displays the matching songs and artists
-     print(f"The possible matching song(s) are: {x}")          
-     danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
-     #Displays the first bar graph of the user's inputted song and danceability score
-     x.data_vis(danceability_search)
+    # Displays the matching songs and artists
+    print(f"The possible matching song(s) are: {x}")          
+    danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
+    #Displays the first bar graph of the user's inputted song and danceability score
+    x.data_vis(danceability_search)
      
      
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 | -------------   | -------------  | -------------------------|
 | mergefiles      | Emily Wright  | PANDAS merge and drop |
 | regexGroup      | Emily Wright   | regular expressions |
-| get_duration_and_links    | Michelle Nguyen   | Filtering w/ Pandas |
+| get_duration_and_links    | Michelle Nguyen   | Filtering w/ Pandas (not claiming) |
 | __str__    | Michelle Nguyen   | Magic methods, sequence unpacking |
 | search_song_lyrics    | Helga Lau   | list comprehension |
 | main()    | Helga Lau   | f-strings |

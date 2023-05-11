@@ -1,13 +1,13 @@
 | Method/function | Primary author |  Techniques demonstrated |
 | -------------   | -------------  | -------------------------|
-| mergefiles      | Emily Wright  | PANDAS merge and drop |
-| regexGroup      | Emily Wright   | regular expressions |
-| get_duration_and_links    | Michelle Nguyen   | Filtering w/ Pandas (not claiming) |
-| __str__    | Michelle Nguyen   | Magic methods, sequence unpacking |
+| mergefiles()      | Emily Wright  | pandas merge & drop |
+| regexGroup()      | Emily Wright   | regular expressions |
+| get_duration_and_links()    | Michelle Nguyen   | filtering w/ Pandas (not claiming) |
+| __str__()    | Michelle Nguyen   | magic methods, sequence unpacking |
 | search_song_lyrics    | Helga Lau   | list comprehension |
 | main()    | Helga Lau   | f-strings |
-| Content Cell    | Content Cell   | Content Cell |
-| Content Cell    | Content Cell   | Content Cell |
+| check_availability()    | Roshini Saravanan   | conditional expressions |
+| data_vis()   | Roshini Saravanan   | visualizing data w/ pyplot & Pandas dataframe (not claiming) |
 
 Sources:
 

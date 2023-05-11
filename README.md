@@ -1,3 +1,11 @@
+## Files:
+
+1. **spot_millsongdata.csv**: Utilized this csv file to access artists, songs, links, and corresponding lyrics
+2. **Spotify_Youtube.csv**: Utilized this csv file to access additional set of songs, albums, danceability scores, spotify_url link, youtube_url link, & song duration.
+    - These csv files were merged into a dataframe using Pandas to create data visualization bar graphs and access critical columns such as spotify_url links, youtube_url links, song duration, and a songs' danceability score. 
+3. **filename2.txt**: This text file was created as a result of converting the merged dataframe of both csv files into a list of strings to allow our regex() function to parse through the strings and group them using regular expressions.
+4. **spot_A_Song.py**: This python script was created to develop our game, "Spot-A-Song" which contains our Song class, functions, and methods to allow the user to type in the lyrics they want to search for in the prompt line and the artist (if applicable, but this step is optional) to produce their desired song or list of similar songs. Additionally, it provides the song's duration time, spotify link, youtube link in the console as well as the users' song's danceability score in the form of data visualization bar graph. 
+
 | Method/function | Primary author |  Techniques demonstrated |
 | -------------   | -------------  | -------------------------|
 | mergefiles()      | Emily Wright  | pandas merge & drop |

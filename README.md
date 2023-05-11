@@ -4,7 +4,7 @@
 | regexGroup      | Emily Wright   | regular expressions |
 | get_duration_and_links    | Michelle Nguyen   | Filtering w/ Pandas |
 | __str__    | Michelle Nguyen   | Magic methods |
-| Content Cell    | Content Cell   | Content Cell |
-| Content Cell    | Content Cell   | Content Cell |
+| search_song_lyrics    | Helga Lau   | list comprehension |
+| main()    | Helga Lau   | f-strings |
 | Content Cell    | Content Cell   | Content Cell |
 | Content Cell    | Content Cell   | Content Cell |

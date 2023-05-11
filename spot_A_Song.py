@@ -94,7 +94,6 @@ class Song:
         reg_match = regexGroup()
        
         #for match in regex_matches
-        
 
         if artist_search == "not given":
              lyrics_match = [match.group('name') for match in reg_match if
@@ -111,6 +110,19 @@ class Song:
     
     
     def check_availability(lyrics_search, artist_search = "not given"):
+        """Checks the validity of the user's lyrical or artist input. 
+        If the user has inputted an invalid lyric or artist name, it alerts the
+        user through an informal string representation that it is invalid.
+        
+        Args:
+            lyrics_search (list of strings): user's inputted lyrics
+            artist_search (list of strings): user's inputted artist, default
+            key is "not given"
+            
+        Returns:
+            Boolean value from conditional expression based off of the user's 
+            lyrical input or artist input. 
+        """
         reg_match = regexGroup()
         # for song in x:
         if artist_search == "not given":
@@ -126,6 +138,20 @@ class Song:
 
     
     def data_vis(self, song):
+        """Creates two data visualization bar graphs based on users' song 
+        input. Bar graph 1 displays the user's bar graph to its corresponding
+        danceability score. Bar graph 2 displays the top 5 songs with the 
+        highest danceability score to allow user's to compare the users' song
+        danceability score to the top 5 songs. 
+        
+        Args:
+            song (str): user's inputted song
+        
+        Returns:
+        Two data visualization graphs: 
+            1. User's Song vs Danceability Score
+            2. Top 5 Songs with the highest danceability scores
+        """
         #Data Visualization: Bar Graph for user's inputted song and
         #danceability score
         df = self.datafr
@@ -139,8 +165,8 @@ class Song:
         plt.title(f"Danceability for {song}")
         plot_results = plt.show()
         
-        #Data Visualization #2: Sort the danceability score in descending order to get
-        #the top 5 danceability scores
+        #Data Visualization #2: Sort the danceability score in descending order 
+        #to get the top 5 danceability scores
         top_5_dance_scores = df.sort_values('Danceability',
                                             ascending = False).head(5)
 
@@ -191,28 +217,37 @@ def main():
     """
     This function will take input (lyrics and artist) from the user, 
     process that input, and produces a match to their desired inputs. 
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     # Get input from user for song lyrics and artist name
     print("Welcome to Spot-A-Song!")
+    availabilityCheck = False
+    artistCheck = False
+    
     lyrics_search = input("What lyrics do you want to search for?: ")
-    artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+    
+    #Iterates until user inputs a valid input (lyric and artist) for the 
+    #check_availability method
+    while(availabilityCheck is False):
+        if (Song.check_availability(lyrics_search) is True):
+            artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            while(Song.check_availability(lyrics_search, artist_search) is False):
+                print("Invalid artist")
+                artist_search = input("What is the name of the artist? (Put \"not given\" if unknown ): ")
+            availabilityCheck = True
+        else:
+            print("Invalid lyrics")
+            lyrics_search = input("What lyrics do you want to search for?: ")
+            
     x = Song()
-     #Displayes the second bar graph of the top 5 danceability scores and songs -> gives users ability to compare their song to the top 5 songs to see if it has a high danceability score
-     
      
     results = x.search_song_lyrics(lyrics_search, artist_search)
     results2 = ', '.join(results)
     
     # Displays the matching songs and artists
-    print(f"The possible matching song(s) are: {x}")          
-    danceability_search = input("Want to check to see if you can dance to this song? What is your song name? ")
-    #Displays the first bar graph of the user's inputted song and danceability score
+    print(f"The possible matching song(s) are: {x}")  
+    
+    #Gets the input from user for song name to calculate and produce data viz        
+    danceability_search = input("Can you dance to this song? Input your song name! ")
     x.data_vis(danceability_search)
      
      

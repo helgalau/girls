@@ -67,6 +67,12 @@ def regexGroup():
 class Song:
     """This class keeps track of all songs being inputted
     by the user and processed.
+    
+    Attributes:
+        artists(list of str): artist names
+        lyrics(list of str): Lyrics in the song
+        links(list of str): links associated with the song
+        duration(list of str): how long the song is
     """
     def __init__(self):
         """Initializes the artists, lyrheics, links, and durations
@@ -88,8 +94,7 @@ class Song:
             
         Returns:
             lyrics_match: the matching lyrics
-            artist_match: the matching artist
-        
+            artist_match: the matching artist  
         """
         reg_match = regexGroup()
        

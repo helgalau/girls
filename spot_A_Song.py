@@ -1,11 +1,16 @@
-"""A module for finding a song match based on lyrics and artist.
-"""
+"""Script that allows the user to type in lyrics, artist (if applicable)
+to search for their desired song or list of similar songs. Additionally, it 
+provides the song's duration time, spotify link, youtube link, and danceability
+score.
+
 ## link to csv -> https://www.kaggle.com/datasets/notshrirang/spotify-million-song-dataset
 ## link to csv 2 -> https://www.kaggle.com/datasets/salvatorerastelli/spotify-and-youtube 
+"""
 
 import matplotlib.pyplot as plt
 import pandas as pd 
 import re
+"""A module for finding a song match based on lyrics and artist."""
 
 def mergefiles():
     """Opens up the two csv files containing the songs' information and 

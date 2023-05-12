@@ -21,7 +21,8 @@ def mergefiles():
         df(Pandas Dataframe): New dataframe that includes the songs information
     
     Side effects:
-        Creates filename2.txt and populates it with a dataframe information
+        Creates filename2.txt and populates it with a dataframe information;
+        Merges 2 different csv files and drop selected columns
     """
     song_info = pd.read_csv("Spotify_Youtube.csv", sep = ",")
     songs = pd.read_csv("spotify_millsongdata.csv", sep = ",")
@@ -49,7 +50,7 @@ def regexGroup():
     """Groups the information from the file that contains the song information.
     
     Returns:
-        match(list of str)    
+        match(list of str): an iterator yielding match objects from the matching  
     """
     with open('filename2.txt', 'r', encoding = "ANSI") as f:
         lines = f.readlines()

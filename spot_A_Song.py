@@ -50,7 +50,8 @@ def regexGroup():
     """Groups the information from the file that contains the song information.
     
     Returns:
-        match(list of str): an iterator yielding match objects from the matching  
+        match(list of str): an iterator yielding match objects from the matching
+            group
     """
     with open('filename2.txt', 'r', encoding = "ANSI") as f:
         lines = f.readlines()

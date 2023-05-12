@@ -16,14 +16,18 @@
    **What lyrics do you want to search for?:**
    
    Type in **exact** lyrics from our filename2.txt.
+   
    _- Note 1: Our program is case-sensitive so please type in the exact uppercase and lowercase lyrics to the program_
+   
    _- Note 2: If you type in any lyrics that are not from our text file or numbers into the program, you will be prompted with the "invalid lyrics" until you type in a valid string of lyrics_
 3. Once you've inputted your desired lyrics, you will be prompted with the following question:
 
    **What is the name of the artist? (Put "not given" if unknown ):**
    
-   Type in the artist's name. If the artist is unknown, type in "not given". 
+   Type in the artist's name. If the artist is unknown, type in "not given".
+   
    _- Note 1: Our program is case-sensitive so please type in the exact uppercase and lowercase name of the artist to the program_
+   
    _- Note 2: If you type in an artist's name that is not from our text file or numbers into the program, you will be prompted with the "invalid artist" until you type in a valid artist's name_
 
 4. If you typed in a specific artist's name, you will be given the exact matching song and the artist's name. However, if you typed in "not given", you will be given a list of all of the possible matching songs that match the lyrics you inputted into the system as well as the closest artist match. Additionally, you will be providied with the song's metadata:
